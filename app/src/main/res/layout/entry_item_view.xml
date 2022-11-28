@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/titleEditTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/edit_icon"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:text="Sample entry"
+        android:inputType="text"
+        android:enabled="false"/>
+    <ImageView
+
+        android:layout_toStartOf="@+id/delete_icon"
+        android:padding="10dp"
+        android:id="@+id/edit_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/pencil_edit_button_svgrepo_com" />
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp"
+        android:id="@+id/delete_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/x_svgrepo_com" />
+
+
+</RelativeLayout>
