@@ -23,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 public class RegisterActivity extends Activity {
     public EditText UserNameText;
     public EditText PasswordText;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +32,17 @@ public class RegisterActivity extends Activity {
         UserNameText = findViewById(R.id.usernameTextViewRegister);
         PasswordText = findViewById(R.id.editTextTextPasswordRegister);
     }
-    public void GoToLogin(View view){
+
+    public void GoToLogin(View view) {
         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
         finish();
     }
-    public void Register (View view){
+
+    public void Register(View view) {
         JSONObject data = new JSONObject();
         try {
-            data.put("Name",UserNameText.getText().toString().trim());
-            data.put("Password",PasswordText.getText().toString().trim());
+            data.put("Name", UserNameText.getText().toString().trim());
+            data.put("Password", PasswordText.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -47,13 +50,17 @@ public class RegisterActivity extends Activity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Configuration.IP_ADDRESS + "/user/register", data, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                    Toast.makeText(getApplicationContext(), "Successfully registered!", Toast.LENGTH_SHORT).show();
-                    GoToLogin(null);
+                Toast.makeText(getApplicationContext(), "Successfully registered!", Toast.LENGTH_SHORT).show();
+                GoToLogin(null);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), new String(error.networkResponse.data, StandardCharsets.UTF_8), Toast.LENGTH_LONG).show();
+                if (error.networkResponse == null) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), new String(error.networkResponse.data, StandardCharsets.UTF_8), Toast.LENGTH_LONG).show();
+                }
             }
         });
         Volley.newRequestQueue(this).add(jsonObjectRequest);

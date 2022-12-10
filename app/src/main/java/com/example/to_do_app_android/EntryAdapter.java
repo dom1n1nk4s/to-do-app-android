@@ -91,8 +91,11 @@ public class EntryAdapter extends BaseAdapter {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                error.printStackTrace();
-                                Toast.makeText(context, new String(error.networkResponse.data, StandardCharsets.UTF_8), Toast.LENGTH_LONG).show();
+                                if (error.networkResponse == null) {
+                                    Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(context, new String(error.networkResponse.data, StandardCharsets.UTF_8), Toast.LENGTH_LONG).show();
+                                }
                             }
                         }) {
                             @Override
@@ -130,7 +133,11 @@ public class EntryAdapter extends BaseAdapter {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, new String(error.networkResponse.data, StandardCharsets.UTF_8), Toast.LENGTH_LONG).show();
+                        if (error.networkResponse == null) {
+                            Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(context, new String(error.networkResponse.data, StandardCharsets.UTF_8), Toast.LENGTH_LONG).show();
+                        }
                     }
                 }) {
                     @Override
