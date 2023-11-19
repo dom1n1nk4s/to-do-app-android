@@ -46,6 +46,8 @@ public EditText PasswordText;
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
                         Configuration.BEARER_TOKEN = response;
+                        UserNameText.setText("");
+                        PasswordText.setText("");
                         startActivity(new Intent(MainActivity.this, EntryActivity.class));
                     }
                 },
